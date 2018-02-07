@@ -1,0 +1,444 @@
+
+
+
+.navbar.mm-navbar {
+  background-color: rgb(15,225,179);
+  border-radius: 0px;
+  padding:0;
+}
+
+.navbar.mm-navbar .navbar-nav .nav-link {
+  color: #FFF;
+}
+
+.navbar.mm-navbar .navbar-brand {
+  float: none;
+  text-align: center;
+  display: block;
+  width: 150px;
+  margin: auto;
+}
+
+.navbar.mm-navbar .navbar-brand img {
+  display: inline-block;
+  width: 100%;
+}
+
+.glyphicon-menu-hamburger {
+  font-size: 20px;
+  color: #eee;
+  z-index: 1;
+}
+
+.glyphicon-arrow-left {
+  font-size: 20px;
+  color: #eee;
+  z-index: 1;
+}
+
+.btn {
+  background-color: transparent;
+}
+
+.sidebar {
+  position: absolute;
+}
+
+.navbar-text {
+  z-index: 0;
+}
+
+
+.buttonText {
+  color: #d8d8d8;
+  font-size: 20px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+table {
+  table-layout: fixed;
+}
+
+
+
+.form-control {
+  margin-bottom: 10px;
+}
+
+.sortForm {
+  display: inline-block !important;
+  width: auto !important;
+}
+
+.input-group-addon:hover, .fa-plus:hover, .fa-minus:hover, .clickable {
+  cursor: pointer;
+}
+
+.fa-plus {
+  position: absolute;
+  top: 34vh;
+  left: 32vw;
+}
+
+.fa-minus {
+  position: relative;
+  left: 34vw;
+  top: -10px;
+}
+
+.datePicker {
+  position: relative;
+  padding-top: 5px;
+  /*top: -20px;*/
+  height: 20px;
+  left: 20px;
+}
+
+.formLabel {
+  position: relative;
+  float: left;
+}
+
+.micImg {
+  position: relative;
+  top: 50px;
+  width: 200px;
+  height: 400px;
+}
+
+.timeSelector {
+  position: relative;
+  width: 100%;
+}
+
+.dropdown {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.dropdown__content {
+  display: none;
+  position: absolute;
+  text-align: center;
+  border-radius: 5px;
+  width: 100%;
+  max-height: 200px;
+  overflow: scroll;
+  color: #000;
+  background-color: #fff;
+  z-index: 99;
+}
+
+.dropdown--active .dropdown__content {
+  display: block;
+}
+
+.timeOption {
+  position: relative;
+  height: 25px;
+  padding-top: 3px;
+  padding-bottom: 8px;
+  width: 100%;
+}
+
+.timeOption:hover {
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+.check {
+  min-width: 75px;
+  margin-right: 10px;
+}
+
+.locationName {
+  position: relative;
+  width: 100%;
+  /*height: 25px;*/
+  margin-top: 2px;
+  padding-top: 2px;
+  padding-left: 5px;
+  text-align: left;
+  color: #000;
+  white-space: nowrap;
+  /*background-color: #000;*/
+}
+
+.locationAddress {
+  position: relative;
+  width: 100%;
+  /*height: 15px;*/
+  /*margin-top: 2px;*/
+  /*padding-top: 2px;*/
+  padding-left: 5px;
+  text-align: left;
+  color: #BABABA;
+  white-space: nowrap;
+}
+
+.locationContainer:hover {
+  cursor: pointer;
+  background-color: #d8d8d8;
+}
+
+.location-list {
+  height: auto;
+  max-height: 150px;
+  overflow-y: scroll;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.deleteMic {
+  position: relative;
+  margin-left: 20px;
+  margin-top: 4px;
+  margin-right: -10px;
+  /*top: 50%;*/
+  /*text-align: center;*/
+}
+
+.sortContainer {
+  margin: 0 auto;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.dropdownItem {
+  color: #000;
+}
+
+.pagination>li>a, .pagination>li>span {
+  border-radius: 50% !important;
+  margin: 0 5px;
+  width: 33.8px !important;
+  height: 34px !important;
+  display: flex;
+  justify-content: center;
+}
+
+.centerDiv {
+  /*position: relative;*/
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  min-height: 75%;
+}
+
+ul.bottomDiv {
+  /*position: absolute;*/
+  /*bottom: -50px;*/
+  /*bottom: 0;*/
+  position: relative;
+  margin: 0 auto;
+}
+
+.form-control[readonly] {
+  background-color: #ccc !important;
+}
+.multi-calander button{ margin: 1em 0;}
+
+
+.date-picker{
+  width: 100%;
+  float: left;
+  height: 40px;
+}
+.date-picker .react-date-picker__button{
+  width: 100%;
+  background: #fff;
+  color: #000;
+}
+
+.date-picker .react-date-picker__calendar {
+  z-index:100;
+}
+.date-picker .react-calendar{
+  color: #000;
+}
+
+.mics-list-container {
+  padding-top:20px;
+}
+
+@media (max-width: 767px) {
+
+  .text-xs-center {
+    text-align: center !important;
+  } 
+}
+
+#info-page {
+  position: relative;
+}
+
+#info-page .bottom-container {
+  width: 100%;
+  padding-top: 60px;
+}
+
+#info-page .content-container:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+#info-page .top-container {
+  display: none;
+}
+
+#info-page .left-container {
+  position: relative;
+  min-height: 200px;
+  padding-right: 20px;
+}
+
+#info-page .right-container {
+  min-height: 200px;
+}
+
+#info-page .left-bottom-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.heading {
+  color: #1F3880;
+}
+
+.title {
+  font-size: 20px;
+  color: #1F3880;
+  text-align: center;
+  padding-bottom: 8px;
+}
+
+.sub-title {
+  font-size: 14px;
+  color: #1F3880;
+  text-align: center;
+  line-height: 16px;
+}
+
+.mic-logo {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 10px;
+  margin: auto;
+}
+
+.mic-image {
+  width: 100%;
+}
+
+.field-container {
+  width: 100%;
+  border-bottom: 1px solid #DDD;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+}
+
+.field-container .label {
+  font-size: 12px;
+  color: #999;
+  padding: 0;
+}
+
+.field-container .value {
+  font-size: 16px;
+  line-height: 20px;
+  color: #1F3880;
+}
+
+.like-count-circle {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  border-radius: 50px;
+  border: 4px solid rgb(6, 214, 169);
+  z-index:10;
+  background: #FFF;
+}
+
+.dislike-count-circle {
+  width: 80px;
+  height: 80px;
+  margin: auto;
+  border-radius: 50px;
+  border: 4px solid #E10F25;
+  z-index: 9;
+  background: #FFF;
+}
+
+
+
+.valign-container {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.rating-text {
+  font-size: 26px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.success-text {
+  color: rgb(6, 214, 169);
+}
+
+.error-text {
+  color: #E10F25;
+}
+
+@media (min-width: 768px) {
+  .like-count-circle {
+    position: relative;
+  }
+
+  .dislike-count-circle {
+    position: relative;
+    bottom: 10px;
+  }
+
+  #info-page .top-container {
+    display: none;
+  }
+}
+
+
+@media (max-width: 767px) {
+  #info-page .left-container {
+    display: none;
+  }
+
+  #info-page .top-container {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  #info-page .top-left-container,
+  #info-page .top-right-container {
+    padding-top: 30px;
+    text-align: center;
+  }
+
+  #info-page .bottom-container {
+    padding-top: 30px;
+  }
+
+  .like-count-circle {
+    position: relative;
+  }
+
+  .dislike-count-circle {
+    position: relative;
+    margin-top: -18px;
+  }
+}
