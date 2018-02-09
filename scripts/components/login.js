@@ -36,18 +36,21 @@ export default class Login extends Component {
       this.props.history.push('/List');
       
     return (
-      <div className="centerDiv" style={{left: '23%', flexDirection: 'column', position: 'absolute'}}>
+      <div>
+
+        <h3 className="text-center heading">Welcome back to the MicMaps Admin Panel</h3>
         <div className="row">
-          <div className="col-md-offset-5 col-md-3">
+        
+          <div className="offset-sm-4 col-md-4">
             <div className="form-login">
-              <h4>Welcome back.</h4>
+              <h4>Login to continue.</h4>
               <input type="text" id="userName" className="form-control input-sm chat-input" placeholder="username" onChange={(ev) => this.setState({email: ev.target.value})} />
               <br />
               <input type="password" id="userPassword" className="form-control input-sm chat-input" placeholder="password" onChange={(ev) => this.setState({password: ev.target.value})} />
               <br />
               <div className="wrapper">
                 <span className="group-btn">     
-                  <a onClick={this.login.bind(this)} style={{width: '100%'}} href="#" className="btn btn-primary btn-md">login <i className="fa fa-sign-in"></i></a>
+                  <a onClick={this.login.bind(this)} style={{width: '100%'}} href="#" className="btn btn-primary btn-md">Login <i className="fa fa-sign-in"></i></a>
                 </span>
               </div>
             </div>

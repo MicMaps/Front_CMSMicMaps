@@ -8,6 +8,9 @@ import Header from './components/header';
 import MicEntry from './components/micEntry';
 import EditMic from './components/editMic';
 import Login from './components/login';
+import Ambassadors from './components/Ambassadors';
+import AddAmbassador from './components/AddAmbassador';
+import Users from './components/Users';
 
 render(
   <BrowserRouter>
@@ -19,6 +22,9 @@ render(
       <Route path='/AddMic' component={NewMic} />
       <Route path='/Mic/:MicId' component={MicEntry} />
       <Route path='/Edit/:MicId' component={EditMic} />
+      <Route path='/Ambassadors' component={Ambassadors} />
+      <Route path='/AddAmbassadors' component={AddAmbassador} />
+      <Route path='/Users' component={Users} />
     </div>
   </BrowserRouter>
   , document.getElementById('root')

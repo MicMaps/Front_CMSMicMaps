@@ -29,10 +29,13 @@ export default class Header extends Component {
                 <Link to="/AddMic" className="nav-link">Add Mic</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Users</a>
+              <Link to="/Users" className="nav-link">Users</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Ambassadors</a>
+                <Link to="/Ambassadors" className="nav-link">Ambassadors</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/AddAmbassadors" className="nav-link">Add Ambassador</Link>
               </li>
               <li className="nav-item">
               <Link to="/" className="nav-link"  onClick={this.logout}>Logout</Link>

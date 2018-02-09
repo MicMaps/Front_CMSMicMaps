@@ -80,11 +80,6 @@ export default class App extends Component {
     if(this.state.loading)
       this.getEntries(this.state.micFilter);
 
-    let containerRightPadding = this.state.width*0.1041;
-    let width = this.state.width - containerRightPadding/2;
-    let leftOffset = (window.innerWidth - (.8125*window.innerWidth))/2;
-    //left: `${50 - (175/window.innerWidth)*100}%`
-
     return (
       <div>
         <Header title='Admin Panel' />
