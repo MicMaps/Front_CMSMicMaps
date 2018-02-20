@@ -57,6 +57,7 @@ export default class AddAmbassador extends Component {
     render() {
         return (
             <div>
+                <Header title='Add Ambassodor' />
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12">

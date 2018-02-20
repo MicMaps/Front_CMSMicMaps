@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export default class Header extends Component {
   constructor(props) {
@@ -23,22 +23,22 @@ export default class Header extends Component {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link to="/List" className="nav-link">Mics</Link>
+                <NavLink to="/List" activeClassName='active' className="nav-link">Mics</NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/AddMic" className="nav-link">Add Mic</Link>
+                <NavLink to="/AddMic" activeClassName='active' className="nav-link">Add Mic</NavLink>
               </li>
               <li className="nav-item">
-              <Link to="/Users" className="nav-link">Users</Link>
+              <NavLink to="/Users"  activeClassName='active' className="nav-link">Users</NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/Ambassadors" className="nav-link">Ambassadors</Link>
+                <NavLink to="/Ambassadors" activeClassName='active' className="nav-link">Ambassadors</NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/AddAmbassadors" className="nav-link">Add Ambassador</Link>
+                <NavLink to="/AddAmbassadors" activeClassName='active' className="nav-link">Add Ambassador</NavLink>
               </li>
               <li className="nav-item">
-              <Link to="/" className="nav-link"  onClick={this.logout}>Logout</Link>
+              <Link to="/" className="nav-link"   onClick={this.logout}>Logout</Link>
               </li>
             </ul>
 

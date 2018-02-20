@@ -23,12 +23,12 @@ export default class ListContainer extends Component {
         <table className="table table-bordered table-hover">
           <thead className='thead-light'>
             <tr>
-              <th  className='col-sm-2'>Date</th>
-              <th  className='col-sm-2'>Name</th>
-              <th  className='col-sm-2'>Venue</th>
-              <th className='col-sm-2'>City</th>
-              <th className='col-sm-2'>Email</th>
-              <th className='col-sm-2'>Actions</th>
+              <th>Date</th>
+              <th>Mic Name</th>
+              <th>Venue</th>
+              <th>City</th>
+              <th>Host Details</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody style={{wordWrap: 'break-word'}}>

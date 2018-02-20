@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 
-import Header from './components/header';
-import ListContainer from './components/MicList/listContainer';
-import Pagination from './components/Pagination';
+import Header from './header';
+import ListContainer from './MicList/listContainer';
 
 let that = null;
 const entriesPerPage = 100;
 
-export default class App extends Component {
+export default class UserMicDetails extends Component {
   constructor(props) {
     super(props);
 
@@ -19,7 +18,8 @@ export default class App extends Component {
       currentPage: 1,
       micFilter: 'approved',
       loading: true,
-      showMore:false
+      showMore:false,
+      userName:''
     };
 
     that = this;
@@ -31,10 +31,14 @@ export default class App extends Component {
       currentPage: 1
     })
   }
+
+  componentDidMount() {
+      this.getUser()
+  }
   getEntries(status) {
     var auth = {
       method: 'GET',
-      url: 'http://localhost:3000/api/mics',
+      url: `http://localhost:3000/api/mics/ambassador/${this.props.match.params.id}`,
       headers: {
         'Authorization' : window.sessionStorage.getItem('token')
       },
@@ -43,22 +47,52 @@ export default class App extends Component {
         limit: entriesPerPage,
         skip: (this.state.currentPage - 1) * entriesPerPage,
         sortOrder: this.state.sortType,
-        sortBy: this.state.sort
+        sortBy: this.state.sort,
+        ambassador:this.props.match.params.id
       }
     };
 
     return Axios(auth)
       .then((res) => {
-        if(res.data.message === 'Mics!') {
-          const showMore = res.data.data.length === entriesPerPage
-          const entries = this.state.entries.concat(res.data.data)
-          this.setState({ showMore:showMore, entries: entries, loading: false });
+        if(res.status == 200) {
+            const showMore = res.data.data.length === entriesPerPage
+            const entries = this.state.entries.concat(res.data.data)
+            this.setState({ showMore:showMore, entries: entries, loading: false });
         }
         console.log(res);
       })
+      
       .catch((err) => {
-        this.props.history.push('/');
+        if(err && err.response && err.response.status == 401) {
+            this.props.history.push('/');
+        } else {
+            console.log(err)
+            alert(err && err.response? err.response.data.error : "Some error occurred.")
+        }
       })
+  }
+
+  getUser() {
+    var auth = {
+        method: 'GET',
+        url: `http://localhost:3000/api/ambassadors/${this.props.match.params.id}`,
+        headers: {
+          'Authorization' : window.sessionStorage.getItem('token')
+        }
+      };
+  
+      return Axios(auth)
+        .then((res) => {
+          if(res.status == 200) {
+            console.log(res.data)
+            this.setState({ ambassadorName: res.data.data.name});
+          }
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err)
+          //this.props.history.push('/');
+        })
   }
 
   toggleSort() {
@@ -77,14 +111,20 @@ export default class App extends Component {
     if(window.sessionStorage.getItem('token') == null)
       this.props.history.push('/');
 
-    if(this.state.loading)
+    if(this.state.loading && this.state.ambassadorName) {
       this.getEntries(this.state.micFilter);
-
+    }
+    console.log(this.state.ambassadorName)
+    const userName = this.state.ambassadorName ?(this.state.ambassadorName):''
     return (
       <div>
         <Header title='Admin Panel' />
+        { this.state.loading == true
+        ?<div className="text-center">Loading... </div>
+        :<div>
         <div className='mics-list-container'>
         <div className='container sortContainer'>
+        <h2 className="heading text-center">Ambassador - {userName}'s Mics</h2>
           <div className='row'>
           <div className='col-xs-12 col-sm-6 text-right text-xs-center'>
             <label>Sort by: </label>
@@ -92,7 +132,6 @@ export default class App extends Component {
               <option className='dropdownItem' value='days'>Date</option>
               <option className='dropdownItem' value='hostName'>Name</option>
               <option className='dropdownItem' value='city'>City</option>
-              <option className='dropdownItem' value = 'hostEmail'>Email</option>
             </select>
 
             <span className="fa fa-sort fa-2x clickable" aria-hidden="true" style={{position: 'absolute', marginLeft: '5px'}} onClick={() => this.toggleSort()}>
@@ -101,13 +140,13 @@ export default class App extends Component {
 
           <div className='col-xs-12 col-sm-6 text-left text-xs-center'>
             <label>Filter mics: </label>
-            <select className='form-control sortForm' style={{marginLeft: '15px'}} onChange={(ev) => { this.resetState(); this.setState({micFilter: ev.target.value.toLowerCase(), loading:true}); }}>
-              <option className='dropdownItem'>Approved</option>
-              <option className='dropdownItem'>Pending</option>
-              <option className='dropdownItem'>Rejected</option>
-              <option className='dropdownItem'>Declined</option>
-              <option className='dropdownItem'>Archived</option>
-              <option className='dropdownItem'>All</option>
+            <select className='form-control sortForm' value = {this.state.micFilter} style={{marginLeft: '15px'}} onChange={(ev) => { this.resetState(); this.setState({micFilter: ev.target.value.toLowerCase(), loading:true}); }}>
+              <option className='dropdownItem' value="approved">Approved</option>
+              <option className='dropdownItem' value="pending">Pending</option>
+              <option className='dropdownItem' value="rejected">Rejected</option>
+              <option className='dropdownItem' value="declined">Declined</option>
+              <option className='dropdownItem' value="archived">Archived</option>
+              <option className='dropdownItem' value="all">All</option>
             </select>
           </div>
         </div>
@@ -128,6 +167,9 @@ export default class App extends Component {
           </div>
       </div>
       </div>
+      }
+      </div>
+    
     );
   }
 }

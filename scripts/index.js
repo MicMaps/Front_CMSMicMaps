@@ -11,10 +11,13 @@ import Login from './components/login';
 import Ambassadors from './components/Ambassadors';
 import AddAmbassador from './components/AddAmbassador';
 import Users from './components/Users';
+import UserMicDetails from './components/UserMicDetails';
+import AmbassadorMicDetails from './components/AmbassadorMicDetails';
 
 render(
   <BrowserRouter>
     <div>
+    <Switch>
       {/*<Header title='Admin Panel' />*/}
       <Route exact path='/' component={Login} />
       {/*<Route exact path='/' component={App} />*/}
@@ -22,9 +25,12 @@ render(
       <Route path='/AddMic' component={NewMic} />
       <Route path='/Mic/:MicId' component={MicEntry} />
       <Route path='/Edit/:MicId' component={EditMic} />
-      <Route path='/Ambassadors' component={Ambassadors} />
+      <Route exact path='/Ambassadors' component={Ambassadors} />
+      <Route path='/Ambassadors/:id' component={AmbassadorMicDetails} />
       <Route path='/AddAmbassadors' component={AddAmbassador} />
-      <Route path='/Users' component={Users} />
+      <Route exact path='/Users' component={Users} />
+      <Route path='/Users/:id' component={UserMicDetails} />
+    </Switch>
     </div>
   </BrowserRouter>
   , document.getElementById('root')

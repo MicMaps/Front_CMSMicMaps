@@ -34,19 +34,22 @@ export default class ListEntry extends Component {
           <Moment format="MMM D, YYYY">{this.props.entry.days[0]}</Moment>
           {this.props.entry.repeatFrequency?
            this.props.entry.repeatFrequency !== 'custom'?
-            <div>Repeat Times - {this.props.entry.repeatFrequency}
-              <br/> Repeats Until - <Moment format="MMM D, YYYY">{this.props.entry.days[this.props.entry.days.length - 1]}</Moment>
+            <div><span className="subtitle">Repeat Times - </span>{this.props.entry.repeatFrequency}
+              <br/><span className="subtitle"> Repeats Until - </span><Moment format="MMM D, YYYY">{this.props.entry.days[this.props.entry.days.length - 1]}</Moment>
             </div>
-            :<div>Repeat Times - {this.props.entry.repeatFrequency}
-            <br/> Last Date - <Moment format="MMM D, YYYY">{this.props.entry.days[this.props.entry.days.length - 1]}</Moment>
+            :<div><span className="subtitle">Repeat Times - </span> {this.props.entry.repeatFrequency}
+            <br/><span className="subtitle"> Last Date - </span><Moment format="MMM D, YYYY">{this.props.entry.days[this.props.entry.days.length - 1]}</Moment>
             </div>
             :null
           }
         </td>
-        <td>{this.props.entry.hostName}</td>
+        <td>{this.props.entry.name}</td>
         <td>{this.props.entry.venueName}</td>
         <td>{this.props.entry.venueAddress.split(',')[1]}</td>
-        <td>{this.props.entry.hostEmail}</td>
+        <td><span className="subtitle">Name - </span> {this.props.entry.hostName}
+          <br/> <span className="subtitle"> Email - </span>{this.props.entry.hostEmail?this.props.entry.hostEmail:''}
+          <br/> <span className="subtitle"> Phone - </span>{this.props.entry.hostPhone?this.props.entry.hostPhone:''}
+        </td>
 
         <td className='buttonContainer'>
           <button role='submit' className='btn btn-danger btn-sm deleteMic' onClick={() => this.deleteEntry(this.props.entry)}>

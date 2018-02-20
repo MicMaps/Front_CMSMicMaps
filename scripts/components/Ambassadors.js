@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Axios from 'axios';
 import Header from './header';
 import Moment from 'react-moment';
+import {Link} from 'react-router-dom';
 
-const entriesPerPage = 1;
+const entriesPerPage = 100;
 
 export default class Ambassadors extends Component {
     constructor(props) {
@@ -70,13 +71,13 @@ export default class Ambassadors extends Component {
         this.state.entries.map((entry, id) => {
             return  (
                 <tr key={id}>
-                  <td>
-                    {entry.name}
-                  </td>
-                  <td>{entry.code}</td>
-                  <td>0</td>
-                  <td><Moment format="MMM D, YYYY">{entry.createdAt}</Moment></td>
-
+                    <td>
+                        {entry.name}
+                    </td>
+                    <td>{entry.code}</td>
+                    <td>{entry.noOfSignups}</td>
+                    <td><Moment format="MMM D, YYYY">{entry.createdAt}</Moment></td>
+                    <td><Link to={`/Ambassadors/${entry._id}`} className="btn btn-primary">Mics</Link></td>
                 </tr>
               );
         }):null
@@ -108,10 +109,11 @@ export default class Ambassadors extends Component {
                         <table className="table table-bordered table-hover">
                         <thead className='thead-light'>
                             <tr>
-                                <th  className='col-sm-4'>Name</th>
-                                <th  className='col-sm-4'>Code</th>
-                                <th  className='col-sm-4'>No. of Signups</th>
-                                <th  className='col-sm-4'>Created At</th>
+                                <th >Name</th>
+                                <th>Code</th>
+                                <th>No. of Signups</th>
+                                <th>Created At</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody style={{wordWrap: 'break-word'}}>
