@@ -11,7 +11,7 @@ export default class ListEntry extends Component {
   deleteEntry(entry) {
     let auth = {
       method: 'DELETE',
-      url: `http://localhost/api/mic/${entry._id}`,
+      url: `http://staging-api/api/mic/${entry._id}`,
       headers: {
         authorization: window.sessionStorage.getItem('token')
       }

@@ -362,7 +362,7 @@ class EditMic extends Component {
 
     var auth = {
       method: 'PUT',
-      url: `http://localhost/api/mic/${this.state._id}`,
+      url: `http://staging-api/api/mic/${this.state._id}`,
       headers: {
         'Authorization': window.sessionStorage.getItem('token')
       },
@@ -428,7 +428,7 @@ class EditMic extends Component {
   loadMic(id) {
     let auth = {
       method: 'GET',
-      url: `http://localhost/api/mic/${id}`,
+      url: `http://staging-api/api/mic/${id}`,
       headers: {
         'Authorization': window.sessionStorage.getItem('token')
       }

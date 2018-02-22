@@ -34,7 +34,7 @@ export default class App extends Component {
   getEntries(status) {
     var auth = {
       method: 'GET',
-      url: 'http://localhost/api/mics',
+      url: 'http://staging-api/api/mics',
       headers: {
         'Authorization' : window.sessionStorage.getItem('token')
       },
