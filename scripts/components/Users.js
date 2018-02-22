@@ -102,7 +102,7 @@ export default class Users extends Component {
             return  (
                 <tr key={id}>
                   <td>
-                    {entry.name?((entry.name.first) + ' ' + (entry.name.last?entry.name.last:'')):''}
+                    {entry.name && entry.name.first?((entry.name.first) + ' ' + (entry.name.last?entry.name.last:'')):''}
                   </td>
                   <td>{entry.email}</td>
                   <td>{entry.phone}</td>
