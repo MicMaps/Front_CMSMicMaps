@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
+import moment from 'moment';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -26,12 +27,31 @@ export default class ListEntry extends Component {
       });
   }
 
+  nextDay(days) {
+    let day;
+    for (var i = 0; i < days.length; i++) {
+      var today = moment().startOf('day');
+      var currentDay = moment(days[i])
+      if(currentDay > today) {
+        day = currentDay;
+        break;
+      }
+    }
+    return day;
+  }
+
   render() {
     // console.log(this.props.entry.micType);
     return (
       <tr>
         <td>
-          <Moment format="MMM D, YYYY">{this.props.entry.days[0]}</Moment>
+          Start - <Moment format="MMM D, YYYY">{this.props.entry.days[0]}</Moment>
+          <br/>
+          {
+            this.nextDay(this.props.entry.days)?
+            <div>Next - <b><Moment format="MMM D, YYYY">{this.nextDay(this.props.entry.days)}</Moment></b></div>
+            :null
+          }
           {this.props.entry.repeatFrequency?
            this.props.entry.repeatFrequency !== 'custom'?
             <div><span className="subtitle">Repeat Times - </span>{this.props.entry.repeatFrequency}
