@@ -34,7 +34,7 @@ export default class App extends Component {
   getEntries(status) {
     var auth = {
       method: 'GET',
-      url: 'http://localhost:3000/api/mics',
+      url: 'http://localhost/api/mics',
       headers: {
         'Authorization' : window.sessionStorage.getItem('token')
       },
@@ -91,7 +91,7 @@ export default class App extends Component {
             <select className='form-control sortForm' style={{marginLeft: '15px'}} value = {this.state.sort} onChange={(ev) => {this.resetState(); this.setState({sort: ev.target.value, loading:true})}}>
               <option className='dropdownItem' value='days'>Date</option>
               <option className='dropdownItem' value='hostName'>Name</option>
-              <option className='dropdownItem' value='city'>City</option>
+              <option className='dropdownItem' value='venueCity'>City</option>
               <option className='dropdownItem' value = 'hostEmail'>Email</option>
             </select>
 

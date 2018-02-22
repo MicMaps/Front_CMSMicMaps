@@ -38,7 +38,7 @@ export default class UserMicDetails extends Component {
   getEntries(status) {
     var auth = {
       method: 'GET',
-      url: 'http://localhost:3000/api/mics',
+      url: 'http://localhost/api/mics',
       headers: {
         'Authorization' : window.sessionStorage.getItem('token')
       },
@@ -75,7 +75,7 @@ export default class UserMicDetails extends Component {
   getUser() {
     var auth = {
         method: 'GET',
-        url: `http://localhost:3000/api/user/${this.props.match.params.id}`,
+        url: `http://localhost/api/user/${this.props.match.params.id}`,
         headers: {
           'Authorization' : window.sessionStorage.getItem('token')
         }
@@ -131,7 +131,7 @@ export default class UserMicDetails extends Component {
             <select className='form-control sortForm' style={{marginLeft: '15px'}} value = {this.state.sort} onChange={(ev) => {this.resetState(); this.setState({sort: ev.target.value, loading:true})}}>
               <option className='dropdownItem' value='days'>Date</option>
               <option className='dropdownItem' value='hostName'>Name</option>
-              <option className='dropdownItem' value='city'>City</option>
+              <option className='dropdownItem' value='venueCity'>City</option>
             </select>
 
             <span className="fa fa-sort fa-2x clickable" aria-hidden="true" style={{position: 'absolute', marginLeft: '5px'}} onClick={() => this.toggleSort()}>

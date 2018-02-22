@@ -33,7 +33,7 @@ export default class AddAmbassador extends Component {
         }
         let auth = {
             method: 'POST',
-            url: 'http://localhost:3000/api/ambassadors',
+            url: 'http://localhost/api/ambassadors',
             headers: {
                 'Authorization' : window.sessionStorage.getItem('token')
             },

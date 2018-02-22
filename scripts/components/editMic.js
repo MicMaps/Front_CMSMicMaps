@@ -76,6 +76,7 @@ class EditMic extends Component {
         lat: '',
         lng: ''
       },
+      venueCity:'',
       noOfThumbsUp: 0,
       noOfThumbsDown: 0,
       loading: false,
@@ -236,6 +237,22 @@ class EditMic extends Component {
   }
 
   setLocation(loc) {
+    let venueCity = ''
+    placeService.getDetails(loc, (result, status) => {
+      if (status !== google.maps.places.PlacesServiceStatus.OK) {
+        console.error(status);
+        return;
+      }
+      
+      const address_components = result.address_components;
+      for (var i = 0, component; component = address_components[i]; i++) {
+        if (component.types[0] == 'locality') {
+          venueCity = component['long_name'];
+        }
+      }
+      console.log(venueCity)
+      this.setState({venueCity:venueCity});
+    })
     this.refs.location.value = loc.name;
     let position = {
       lat: loc.geometry.location.lat(),
@@ -272,6 +289,7 @@ class EditMic extends Component {
       name: this.state.micName,
       venueName: this.state.venueName,
       venueAddress: this.state.venueAddress,
+      venueCity: this.state.venueCity,
       location: [
         this.state.venueLocation.lng, this.state.venueLocation.lat
       ],
@@ -344,7 +362,7 @@ class EditMic extends Component {
 
     var auth = {
       method: 'PUT',
-      url: `http://localhost:3000/api/mic/${this.state._id}`,
+      url: `http://localhost/api/mic/${this.state._id}`,
       headers: {
         'Authorization': window.sessionStorage.getItem('token')
       },
@@ -410,7 +428,7 @@ class EditMic extends Component {
   loadMic(id) {
     let auth = {
       method: 'GET',
-      url: `http://localhost:3000/api/mic/${id}`,
+      url: `http://localhost/api/mic/${id}`,
       headers: {
         'Authorization': window.sessionStorage.getItem('token')
       }
@@ -482,6 +500,7 @@ class EditMic extends Component {
           lat: tmp.location[1],
           lng: tmp.location[0]
         },
+        venueCity:tmp.venueCity?tmp.venueCity:'',
         noOfThumbsDown: tmp.noOfThumbsDown,
         noOfThumbsUp: tmp.noOfThumbsUp,
         micType: (tmp.micType != 'signup' && tmp.micType != 'lotto' && tmp.micType != 'booked')

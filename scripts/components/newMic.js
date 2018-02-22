@@ -74,6 +74,7 @@ class NewMic extends Component {
         lat: '',
         lng: ''
       },
+      venueCity:'',
       loading: false,
       calendar: false,
       micType: 'lotto',
@@ -189,6 +190,7 @@ class NewMic extends Component {
   }
 
   updateLocation(loc) {
+    console.log(loc)
     this.setState({ loading: true });
     let locLoad = currLocation.latitude != null && currLocation.longitude != null;
 
@@ -207,6 +209,22 @@ class NewMic extends Component {
   }
 
   setLocation(loc) {
+    let venueCity = ''
+    placeService.getDetails(loc, (result, status) => {
+      if (status !== google.maps.places.PlacesServiceStatus.OK) {
+        console.error(status);
+        return;
+      }
+      
+      const address_components = result.address_components;
+      for (var i = 0, component; component = address_components[i]; i++) {
+        if (component.types[0] == 'locality') {
+          venueCity = component['long_name'];
+        }
+      }
+      console.log(venueCity)
+      this.setState({venueCity:venueCity});
+    })
     this.refs.location.value = loc.name;
     let position = {
       lat: loc.geometry.location.lat(),
@@ -246,6 +264,7 @@ class NewMic extends Component {
         name: this.state.micName,
         venueName: this.state.venueName,
         venueAddress: this.state.venueAddress,
+        venueCity: this.state.venueCity,
         location: [this.state.venueLocation.lng, this.state.venueLocation.lat],
         // location: [10,10],
         startTime: parseInt(moment(`${this.state.startTime.hour}:${this.state.startTime.minute} ${this.state.startTime.evening}`, ['h:mm A']).format('HHmm')),
@@ -303,7 +322,7 @@ class NewMic extends Component {
 
     var auth = {
       method: 'POST',
-      url: 'http://localhost:3000/api/mics',
+      url: 'http://localhost/api/mics',
       headers: {
         'Authorization' : window.sessionStorage.getItem('token')
       },

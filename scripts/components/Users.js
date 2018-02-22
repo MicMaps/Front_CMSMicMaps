@@ -40,7 +40,7 @@ export default class Users extends Component {
       getTotalUsers() {
         var auth = {
             method: 'GET',
-            url: 'http://localhost:3000/api/users/total',
+            url: 'http://localhost/api/users/total',
             headers: {
               'Authorization' : window.sessionStorage.getItem('token')
             }
@@ -66,7 +66,7 @@ export default class Users extends Component {
       getEntries() {
         var auth = {
           method: 'GET',
-          url: 'http://localhost:3000/api/users',
+          url: 'http://localhost/api/users',
           headers: {
             'Authorization' : window.sessionStorage.getItem('token')
           },

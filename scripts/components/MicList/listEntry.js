@@ -11,7 +11,7 @@ export default class ListEntry extends Component {
   deleteEntry(entry) {
     let auth = {
       method: 'DELETE',
-      url: `http://localhost:3000/api/mic/${entry._id}`,
+      url: `http://localhost/api/mic/${entry._id}`,
       headers: {
         authorization: window.sessionStorage.getItem('token')
       }
@@ -45,7 +45,7 @@ export default class ListEntry extends Component {
         </td>
         <td>{this.props.entry.name}</td>
         <td>{this.props.entry.venueName}</td>
-        <td>{this.props.entry.venueAddress.split(',')[1]}</td>
+        <td>{this.props.entry.venueCity?this.props.entry.venueCity:''}</td>
         <td><span className="subtitle">Name - </span> {this.props.entry.hostName}
           <br/> <span className="subtitle"> Email - </span>{this.props.entry.hostEmail?this.props.entry.hostEmail:''}
           <br/> <span className="subtitle"> Phone - </span>{this.props.entry.hostPhone?this.props.entry.hostPhone:''}
