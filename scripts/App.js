@@ -3,7 +3,7 @@ import Axios from 'axios';
 
 import Header from './components/header';
 import ListContainer from './components/MicList/listContainer';
-import Pagination from './components/Pagination';
+import Pagination from './components/pagination';
 
 let that = null;
 const entriesPerPage = 100;
