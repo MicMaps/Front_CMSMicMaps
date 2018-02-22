@@ -40,7 +40,7 @@ export default class Users extends Component {
       getTotalUsers() {
         var auth = {
             method: 'GET',
-            url: 'http://staging-api/api/users/total',
+            url: 'http://staging-api.micmaps.com/api/users/total',
             headers: {
               'Authorization' : window.sessionStorage.getItem('token')
             }
@@ -66,7 +66,7 @@ export default class Users extends Component {
       getEntries() {
         var auth = {
           method: 'GET',
-          url: 'http://staging-api/api/users',
+          url: 'http://staging-api.micmaps.com/api/users',
           headers: {
             'Authorization' : window.sessionStorage.getItem('token')
           },

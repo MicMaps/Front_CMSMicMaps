@@ -322,7 +322,7 @@ class NewMic extends Component {
 
     var auth = {
       method: 'POST',
-      url: 'http://staging-api/api/mics',
+      url: 'http://staging-api.micmaps.com/api/mics',
       headers: {
         'Authorization' : window.sessionStorage.getItem('token')
       },
