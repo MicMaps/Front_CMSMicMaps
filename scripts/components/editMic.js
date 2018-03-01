@@ -362,7 +362,7 @@ class EditMic extends Component {
 
     var auth = {
       method: 'PUT',
-      url: `http://staging-api.micmaps.com/api/mic/${this.state._id}`,
+      url: `http://api.micmaps.com/api/mic/${this.state._id}`,
       headers: {
         'Authorization': window.sessionStorage.getItem('token')
       },
@@ -428,7 +428,7 @@ class EditMic extends Component {
   loadMic(id) {
     let auth = {
       method: 'GET',
-      url: `http://staging-api.micmaps.com/api/mic/${id}`,
+      url: `http://api.micmaps.com/api/mic/${id}`,
       headers: {
         'Authorization': window.sessionStorage.getItem('token')
       }
