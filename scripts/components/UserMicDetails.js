@@ -38,7 +38,7 @@ export default class UserMicDetails extends Component {
   getEntries(status) {
     var auth = {
       method: 'GET',
-      url: 'http://localhost/api/mics',
+      url: 'http://staging-api.micmaps.com/api/mics',
       headers: {
         'Authorization' : window.sessionStorage.getItem('token')
       },
@@ -75,7 +75,7 @@ export default class UserMicDetails extends Component {
   getUser() {
     var auth = {
         method: 'GET',
-        url: `http://localhost/api/user/${this.props.match.params.id}`,
+        url: `http://staging-api.micmaps.com/api/user/${this.props.match.params.id}`,
         headers: {
           'Authorization' : window.sessionStorage.getItem('token')
         }

@@ -14,7 +14,7 @@ export default class Login extends Component {
   login() {
     let auth = {
       method: 'POST',
-      url: 'http://localhost/api/authenticate',
+      url: 'http://staging-api.micmaps.com/api/authenticate',
       data: {
         email: this.state.email,
         password: this.state.password

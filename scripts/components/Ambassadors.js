@@ -36,7 +36,7 @@ export default class Ambassadors extends Component {
       getEntries() {
         var auth = {
           method: 'GET',
-          url: 'http://localhost/api/ambassadors',
+          url: 'http://staging-api.micmaps.com/api/ambassadors',
           headers: {
             'Authorization' : window.sessionStorage.getItem('token')
           },

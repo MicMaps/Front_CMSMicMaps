@@ -39,7 +39,7 @@ export default class App extends Component {
 
     var auth = {
       method: 'GET',
-      url: 'http://localhost/api/mics',
+      url: 'http://staging-api.micmaps.com/api/mics',
       headers: {
         'Authorization' : window.sessionStorage.getItem('token')
       },
@@ -61,7 +61,7 @@ export default class App extends Component {
   getCities(micFilter) {
     var auth = {
       method: 'GET',
-      url: 'http://localhost/api/mics/cities',
+      url: 'http://staging-api.micmaps.com/api/mics/cities',
       headers: {
         'Authorization' : window.sessionStorage.getItem('token')
       },
