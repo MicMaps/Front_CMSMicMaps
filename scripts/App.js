@@ -14,6 +14,8 @@ export default class App extends Component {
 
     this.state = {
       entries: [],
+      cities:[],
+      currentCity:'all',
       sort: 'days',
       sortType: 'Ascending',
       currentPage: 1,
@@ -28,13 +30,16 @@ export default class App extends Component {
   resetState () {
     this.setState({
       entries: [],
-      currentPage: 1
+      currentPage: 1,
+      currentCity:'all'
     })
   }
-  getEntries(status) {
+
+  getMics(status) {
+
     var auth = {
       method: 'GET',
-      url: 'http://staging-api.micmaps.com/api/mics',
+      url: 'http://localhost/api/mics',
       headers: {
         'Authorization' : window.sessionStorage.getItem('token')
       },
@@ -46,19 +51,59 @@ export default class App extends Component {
         sortBy: this.state.sort
       }
     };
+    if(this.state.currentCity != 'all') {
+      auth.params['city'] = this.state.currentCity
+    }
 
     return Axios(auth)
-      .then((res) => {
-        if(res.data.message === 'Mics!') {
-          const showMore = res.data.data.length === entriesPerPage
-          const entries = this.state.entries.concat(res.data.data)
-          this.setState({ showMore:showMore, entries: entries, loading: false });
+  }
+
+  getCities(micFilter) {
+    var auth = {
+      method: 'GET',
+      url: 'http://localhost/api/mics/cities',
+      headers: {
+        'Authorization' : window.sessionStorage.getItem('token')
+      },
+      params: {
+        filter:micFilter
+      }
+    };
+
+    return Axios(auth)
+  }
+
+  getEntries(status) {
+    
+    Axios.all([
+      this.getMics(status),
+      this.getCities(status)
+    ])
+    .then(Axios.spread((res, res1) => {
+        // do something with both responses
+        let showMore, entries, cities;
+        if(res.status == 200) {
+          showMore = res.data.data.length === entriesPerPage
+          entries = this.state.entries.concat(res.data.data)
         }
         console.log(res);
-      })
+        if(res1.status == 200) {
+          cities = res1.data.data
+        }
+        console.log(res1);
+        this.setState({ showMore:showMore, entries: entries, cities:cities, loading: false });
+      }))
       .catch((err) => {
-        this.props.history.push('/');
+        console.log(err)
+        //this.props.history.push('/');
       })
+    }
+
+  
+
+  changeCity(city) {
+    this.resetState()
+    this.setState({currentCity:city, loading:true})
   }
 
   toggleSort() {
@@ -77,16 +122,18 @@ export default class App extends Component {
     if(window.sessionStorage.getItem('token') == null)
       this.props.history.push('/');
 
-    if(this.state.loading)
-      this.getEntries(this.state.micFilter);
+    if(this.state.loading) {
 
+      this.getEntries(this.state.micFilter);
+    }
+    console.log(this.state.cities)
     return (
       <div>
         <Header title='Admin Panel' />
         <div className='mics-list-container'>
         <div className='container sortContainer'>
           <div className='row'>
-          <div className='col-xs-12 col-sm-6 text-right text-xs-center'>
+          <div className='col-xs-12 col-sm-4 text-center text-xs-center'>
             <label>Sort by: </label>
             <select className='form-control sortForm' style={{marginLeft: '15px'}} value = {this.state.sort} onChange={(ev) => {this.resetState(); this.setState({sort: ev.target.value, loading:true})}}>
               <option className='dropdownItem' value='days'>Date</option>
@@ -99,7 +146,7 @@ export default class App extends Component {
             </span>
           </div>
 
-          <div className='col-xs-12 col-sm-6 text-left text-xs-center'>
+          <div className='col-xs-12 col-sm-4 text-center text-xs-center'>
             <label>Filter mics: </label>
             <select className='form-control sortForm' style={{marginLeft: '15px'}} onChange={(ev) => { this.resetState(); this.setState({micFilter: ev.target.value.toLowerCase(), loading:true}); }}>
               <option className='dropdownItem'>Approved</option>
@@ -108,6 +155,18 @@ export default class App extends Component {
               <option className='dropdownItem'>Declined</option>
               <option className='dropdownItem'>Archived</option>
               <option className='dropdownItem'>All</option>
+            </select>
+          </div>
+          <div className='col-xs-12 col-sm-4 text-center text-xs-center'>
+            <label>Cities: </label>
+            <select className='form-control sortForm' style={{marginLeft: '15px'}} onChange={(ev) => { this.changeCity(ev.target.value) }}  >
+            <option className='dropdownItem' value='all'>All</option>
+            {this.state.cities.length?
+              this.state.cities.map((city, id)=> {
+                return (<option className='dropdownItem' value={city._id?city._id:''}>{city._id?city._id:'No City'}({city.count})</option>)
+              })
+              :null
+            }
             </select>
           </div>
         </div>

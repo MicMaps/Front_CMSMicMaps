@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 
 const entriesPerPage = 100;
 
-export default class Ambassadors extends Component {
+export default class AmbassadorUsers extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,11 +32,10 @@ export default class Ambassadors extends Component {
           currentPage: 1
         })
       }
-
       getEntries() {
         var auth = {
           method: 'GET',
-          url: 'http://localhost/api/ambassadors',
+          url: `http://localhost/api/ambassadors/${this.props.match.params.id}/users`,
           headers: {
             'Authorization' : window.sessionStorage.getItem('token')
           },
@@ -71,13 +70,16 @@ export default class Ambassadors extends Component {
         this.state.entries.map((entry, id) => {
             return  (
                 <tr key={id}>
-                    <td>
-                        {entry.name}
-                    </td>
-                    <td>{entry.code}</td>
-                    <td><Link to={`/Ambassadors/${entry._id}/users`}>{entry.noOfSignups}</Link></td>
-                    <td><Moment format="MMM D, YYYY">{entry.createdAt}</Moment></td>
-                    <td><Link to={`/Ambassadors/${entry._id}`} className="btn btn-primary">Mics</Link></td>
+                  <td>
+                    {entry.name && entry.name.first?((entry.name.first) + ' ' + (entry.name.last?entry.name.last:'')):''}
+                  </td>
+                  <td>{entry.email}</td>
+                  <td>{entry.phone}</td>
+                  <td>{entry.referral?`Referral Code - ${entry.referral.code}`:'N/A'}<br/>
+                  {entry.referral?`Ambassador Name - ${entry.referral.name}`:''}</td>
+                  <td><Moment format="MMM D, YYYY">{entry.createdAt}</Moment></td>
+                  <td><Link to={`/users/${entry._id}`} className="btn btn-primary">Mics</Link></td>
+                  
                 </tr>
               );
         }):null
@@ -93,12 +95,13 @@ export default class Ambassadors extends Component {
               <div className="ambassadors-list-container">
                 <div className="container">
                     <div className='row'>
-                        <div className='col-xs-12 col-sm-6 text-right text-xs-center'>
+                        <div className='col-xs-12 col-sm-6 text-left text-xs-center'>
                             <label>Sort by: </label>
                             <select className='form-control sortForm' style={{marginLeft: '15px'}} value = {this.state.sort} onChange={(ev) => {this.resetState(); this.setState({sort: ev.target.value, loading:true})}}>
                                 <option className='dropdownItem' value='createdAt'>Latest Added</option>
-                                <option className='dropdownItem' value='name'>Name</option>
-                                <option className='dropdownItem' value = 'code'>Code</option>
+                                <option className='dropdownItem' value='name.first'>Name</option>
+                                <option className='dropdownItem' value = 'email'>Email</option>
+                                <option className='dropdownItem' value = 'phone'>Phone</option>
                             </select>
 
                             <span className="fa fa-sort fa-2x clickable" aria-hidden="true" style={{position: 'absolute', marginLeft: '5px'}} onClick={() => this.toggleSort()}>
@@ -109,9 +112,10 @@ export default class Ambassadors extends Component {
                         <table className="table table-bordered table-hover">
                         <thead className='thead-light'>
                             <tr>
-                                <th >Name</th>
-                                <th>Code</th>
-                                <th>No. of Signups</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Referral</th>
                                 <th>Created At</th>
                                 <th>Actions</th>
                             </tr>

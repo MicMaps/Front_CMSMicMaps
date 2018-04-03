@@ -13,6 +13,7 @@ import AddAmbassador from './components/AddAmbassador';
 import Users from './components/Users';
 import UserMicDetails from './components/UserMicDetails';
 import AmbassadorMicDetails from './components/AmbassadorMicDetails';
+import AmbassadorUsers from './components/AmbassadorUsers';
 
 render(
   <BrowserRouter>
@@ -26,6 +27,8 @@ render(
       <Route path='/Mic/:MicId' component={MicEntry} />
       <Route path='/Edit/:MicId' component={EditMic} />
       <Route exact path='/Ambassadors' component={Ambassadors} />
+
+      <Route path='/Ambassadors/:id/users' component={AmbassadorUsers} />
       <Route path='/Ambassadors/:id' component={AmbassadorMicDetails} />
       <Route path='/AddAmbassadors' component={AddAmbassador} />
       <Route exact path='/Users' component={Users} />
