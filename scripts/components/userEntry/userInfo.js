@@ -13,7 +13,7 @@ export default class UserInfo extends Component {
     if(this.props.status === 'approved') {
       let auth = {
         method: 'PUT',
-        url: `http://staging-api.micmaps.com/api/mic/${this.props.id}`,
+        url: `http://api.micmaps.com/api/mic/${this.props.id}`,
         headers: {
           'Authorization' : window.sessionStorage.getItem('token')
         },
@@ -32,7 +32,7 @@ export default class UserInfo extends Component {
     } else {
       let auth = {
         method: 'PUT',
-        url: `http://staging-api.micmaps.com/api/mic/${this.props.id}`,
+        url: `http://api.micmaps.com/api/mic/${this.props.id}`,
         headers: {
           'Authorization' : window.sessionStorage.getItem('token')
         },

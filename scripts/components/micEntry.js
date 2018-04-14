@@ -30,7 +30,7 @@ export default class MicEntry extends Component {
     if(this.state.entry.status === 'approved') {
       let auth = {
         method: 'PUT',
-        url: `http://staging-api.micmaps.com/api/mic/${this.props.match.params.MicId}`,
+        url: `http://api.micmaps.com/api/mic/${this.props.match.params.MicId}`,
         headers: {
           'Authorization' : window.sessionStorage.getItem('token')
         },
@@ -49,7 +49,7 @@ export default class MicEntry extends Component {
     } else {
       let auth = {
         method: 'PUT',
-        url: `http://staging-api.micmaps.com/api/mic/${this.props.match.params.MicId}`,
+        url: `http://api.micmaps.com/api/mic/${this.props.match.params.MicId}`,
         headers: {
           'Authorization' : window.sessionStorage.getItem('token')
         },
@@ -83,7 +83,7 @@ export default class MicEntry extends Component {
   getMic() {
     let auth = {
       method: 'GET',
-      url: `http://staging-api.micmaps.com/api/mic/${this.props.match.params.MicId}`,
+      url: `http://api.micmaps.com/api/mic/${this.props.match.params.MicId}`,
       headers: {
         'Authorization': window.sessionStorage.getItem('token')
       }

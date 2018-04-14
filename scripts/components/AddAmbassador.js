@@ -33,7 +33,7 @@ export default class AddAmbassador extends Component {
         }
         let auth = {
             method: 'POST',
-            url: 'http://staging-api.micmaps.com/api/ambassadors',
+            url: 'http://api.micmaps.com/api/ambassadors',
             headers: {
                 'Authorization' : window.sessionStorage.getItem('token')
             },
