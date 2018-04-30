@@ -11,7 +11,7 @@ export default class AmbassadorUsers extends Component {
         super(props);
         this.state = {
             entries: [],
-            sort: 'name',
+            sort: 'name.first',
             sortType: 'Ascending',
             currentPage: 1,
             loading: true,

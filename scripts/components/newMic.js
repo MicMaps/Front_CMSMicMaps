@@ -300,8 +300,8 @@ class NewMic extends Component {
         micParams.days = this.state.days.map((day) => {
           return moment(day).startOf('day').toDate()
         });
-        if(this.state.days.length > 12){
-          return alert("You cant not select more than 12 days in custom frequency.");
+        if(this.state.days.length > 24){
+          return alert("You cant not select more than 24 days in custom frequency.");
         }
         break;
       case 'weekly':
@@ -360,9 +360,9 @@ class NewMic extends Component {
     let optionList = [];
     const {repeatFrequency} = this.state;
     if (repeatFrequency == 'monthly') {
-      maxCount = 6;
+      maxCount = 12;
     } else if (repeatFrequency == 'weekly') {
-      maxCount = 24;
+      maxCount = 52;
     }
     for (let i = 1; i <= maxCount; i++) {
       optionList.push(<option value={i} key={i}>{i}</option>)
@@ -385,7 +385,7 @@ class NewMic extends Component {
     })
     // console.log(index);
     if (index == -1) {
-      if (daysCount == 12) {
+      if (daysCount == 24) {
         alert("Sorry you cant add more dates to custom frequency.");
       } else {
         this.setState({

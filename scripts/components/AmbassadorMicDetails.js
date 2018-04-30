@@ -13,6 +13,8 @@ export default class UserMicDetails extends Component {
 
     this.state = {
       entries: [],
+      cities:[],
+      currentCity:'all',
       sort: 'days',
       sortType: 'Ascending',
       currentPage: 1,
@@ -28,14 +30,17 @@ export default class UserMicDetails extends Component {
   resetState () {
     this.setState({
       entries: [],
-      currentPage: 1
+      currentPage: 1,
+      currentCity:'all'
     })
   }
 
   componentDidMount() {
       this.getUser()
+      this.getCities(this.state.micFilter)
   }
-  getEntries(status) {
+
+  getMics(status) {
     var auth = {
       method: 'GET',
       url: `http://api.micmaps.com/api/mics/ambassador/${this.props.match.params.id}`,
@@ -51,25 +56,42 @@ export default class UserMicDetails extends Component {
         ambassador:this.props.match.params.id
       }
     };
+    if(this.state.currentCity != 'all') {
+      auth.params['city'] = this.state.currentCity
+    }
 
     return Axios(auth)
-      .then((res) => {
-        if(res.status == 200) {
-            const showMore = res.data.data.length === entriesPerPage
-            const entries = this.state.entries.concat(res.data.data)
-            this.setState({ showMore:showMore, entries: entries, loading: false });
-        }
-        console.log(res);
-      })
-      
-      .catch((err) => {
-        if(err && err.response && err.response.status == 401) {
-            this.props.history.push('/');
-        } else {
-            console.log(err)
-            alert(err && err.response? err.response.data.error : "Some error occurred.")
-        }
-      })
+  }
+  getEntries(status) {
+    Axios.all([
+      this.getMics(status),
+      this.getCities(status),
+      this.getUser()
+    ])
+    .then(Axios.spread((res, res1, res2) => {
+      let showMore = false, entries = [], cities = [], ambassadorName = '';
+
+      if(res.status == 200) {
+          showMore = res.data.data.length === entriesPerPage
+          entries = this.state.entries.concat(res.data.data)
+      }
+      if(res1.status == 200) {
+          cities = res1.data.data
+      }
+
+      if(res2.status == 200) {
+        ambassadorName = res2.data.data.name
+      }
+      this.setState({ showMore:showMore, entries: entries, loading: false, cities:cities, ambassadorName: ambassadorName})
+    }))
+    .catch((err) => {
+      if(err && err.response && err.response.status == 401) {
+          this.props.history.push('/');
+      } else {
+          console.log(err)
+          alert(err && err.response? err.response.data.error : "Some error occurred.")
+      }
+    })
   }
 
   getUser() {
@@ -82,19 +104,27 @@ export default class UserMicDetails extends Component {
       };
   
       return Axios(auth)
-        .then((res) => {
-          if(res.status == 200) {
-            console.log(res.data)
-            this.setState({ ambassadorName: res.data.data.name});
-          }
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err)
-          //this.props.history.push('/');
-        })
   }
 
+  getCities(micFilter) {
+    var auth = {
+      method: 'GET',
+      url: `http://api.micmaps.com/api/mics/ambassador/${this.props.match.params.id}/count`,
+      headers: {
+        'Authorization' : window.sessionStorage.getItem('token')
+      },
+      params: {
+        filter:micFilter
+      }
+    };
+
+    return Axios(auth)
+  }
+
+  changeCity(city) {
+    this.resetState()
+    this.setState({currentCity:city, loading:true})
+  }
   toggleSort() {
     this.resetState();
     if(this.state.sortType === 'Ascending')
@@ -107,26 +137,30 @@ export default class UserMicDetails extends Component {
     this.setState({ currentPage: pageNum, loading:true });
   }
 
+  countAllCities() {
+    let sum = 0;
+    for (var i =0; i < this.state.cities.length; i++) {
+      sum = sum + this.state.cities[i].count 
+    }
+    return sum;
+  }
+
   render() {
     if(window.sessionStorage.getItem('token') == null)
       this.props.history.push('/');
 
-    if(this.state.loading && this.state.ambassadorName) {
+    if(this.state.loading) {
       this.getEntries(this.state.micFilter);
     }
-    console.log(this.state.ambassadorName)
     const userName = this.state.ambassadorName ?(this.state.ambassadorName):''
     return (
       <div>
-        <Header title='Admin Panel' />
-        { this.state.loading == true
-        ?<div className="text-center">Loading... </div>
-        :<div>
+        <Header title='Admin Panel' /><div>
         <div className='mics-list-container'>
         <div className='container sortContainer'>
         <h2 className="heading text-center">Ambassador - {userName}'s Mics</h2>
           <div className='row'>
-          <div className='col-xs-12 col-sm-6 text-right text-xs-center'>
+          <div className='col-xs-12 col-sm-4 text-center'>
             <label>Sort by: </label>
             <select className='form-control sortForm' style={{marginLeft: '15px'}} value = {this.state.sort} onChange={(ev) => {this.resetState(); this.setState({sort: ev.target.value, loading:true})}}>
               <option className='dropdownItem' value='days'>Date</option>
@@ -138,7 +172,7 @@ export default class UserMicDetails extends Component {
             </span>
           </div>
 
-          <div className='col-xs-12 col-sm-6 text-left text-xs-center'>
+          <div className='col-xs-12 col-sm-4 text-center'>
             <label>Filter mics: </label>
             <select className='form-control sortForm' value = {this.state.micFilter} style={{marginLeft: '15px'}} onChange={(ev) => { this.resetState(); this.setState({micFilter: ev.target.value.toLowerCase(), loading:true}); }}>
               <option className='dropdownItem' value="approved">Approved</option>
@@ -147,6 +181,18 @@ export default class UserMicDetails extends Component {
               <option className='dropdownItem' value="declined">Declined</option>
               <option className='dropdownItem' value="archived">Archived</option>
               <option className='dropdownItem' value="all">All</option>
+            </select>
+          </div>
+          <div className='col-xs-12 col-sm-4 text-center text-center'>
+            <label>Cities: </label>
+            <select className='form-control sortForm' style={{marginLeft: '15px'}} onChange={(ev) => { this.changeCity(ev.target.value) }}  >
+            <option className='dropdownItem' value='all'>All ({this.countAllCities()})</option>
+            {this.state.cities.length?
+              this.state.cities.map((city, id)=> {
+                return (<option className='dropdownItem' key={city._id?city._id:id} value={city._id?city._id:''}>{city._id?city._id:'No City'}({city.count})</option>)
+              })
+              :null
+            }
             </select>
           </div>
         </div>
@@ -167,7 +213,6 @@ export default class UserMicDetails extends Component {
           </div>
       </div>
       </div>
-      }
       </div>
     
     );

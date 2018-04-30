@@ -118,6 +118,14 @@ export default class App extends Component {
     this.setState({ currentPage: pageNum, loading:true });
   }
 
+  countAllCities() {
+    let sum = 0;
+    for (var i =0; i < this.state.cities.length; i++) {
+      sum = sum + this.state.cities[i].count 
+    }
+    return sum;
+  }
+
   render() {
     if(window.sessionStorage.getItem('token') == null)
       this.props.history.push('/');
@@ -160,10 +168,10 @@ export default class App extends Component {
           <div className='col-xs-12 col-sm-4 text-center text-xs-center'>
             <label>Cities: </label>
             <select className='form-control sortForm' style={{marginLeft: '15px'}} onChange={(ev) => { this.changeCity(ev.target.value) }}  >
-            <option className='dropdownItem' value='all'>All</option>
+            <option className='dropdownItem' value='all'>All ({this.countAllCities()})</option>
             {this.state.cities.length?
               this.state.cities.map((city, id)=> {
-                return (<option className='dropdownItem' value={city._id?city._id:''}>{city._id?city._id:'No City'}({city.count})</option>)
+                return (<option className='dropdownItem' key={city._id?city._id:id} value={city._id?city._id:''}>{city._id?city._id:'No City'}({city.count})</option>)
               })
               :null
             }
