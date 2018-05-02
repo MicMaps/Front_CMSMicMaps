@@ -12,7 +12,7 @@ export default class ListEntry extends Component {
   deleteEntry(entry) {
     let auth = {
       method: 'DELETE',
-      url: `http://api.micmaps.com/api/mic/${entry._id}`,
+      url: `http://staging-api.micmaps.com/api/mic/${entry._id}`,
       headers: {
         authorization: window.sessionStorage.getItem('token')
       }

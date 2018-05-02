@@ -43,7 +43,7 @@ export default class UserMicDetails extends Component {
   getMics(status) {
     var auth = {
       method: 'GET',
-      url: `http://api.micmaps.com/api/mics/ambassador/${this.props.match.params.id}`,
+      url: `http://staging-api.micmaps.com/api/mics/ambassador/${this.props.match.params.id}`,
       headers: {
         'Authorization' : window.sessionStorage.getItem('token')
       },
@@ -97,7 +97,7 @@ export default class UserMicDetails extends Component {
   getUser() {
     var auth = {
         method: 'GET',
-        url: `http://api.micmaps.com/api/ambassadors/${this.props.match.params.id}`,
+        url: `http://staging-api.micmaps.com/api/ambassadors/${this.props.match.params.id}`,
         headers: {
           'Authorization' : window.sessionStorage.getItem('token')
         }
@@ -109,7 +109,7 @@ export default class UserMicDetails extends Component {
   getCities(micFilter) {
     var auth = {
       method: 'GET',
-      url: `http://api.micmaps.com/api/mics/ambassador/${this.props.match.params.id}/count`,
+      url: `http://staging-api.micmaps.com/api/mics/ambassador/${this.props.match.params.id}/count`,
       headers: {
         'Authorization' : window.sessionStorage.getItem('token')
       },
