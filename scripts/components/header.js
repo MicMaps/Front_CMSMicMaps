@@ -22,23 +22,29 @@ export default class Header extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <NavLink to="/List" activeClassName='active' className="nav-link">Mics</NavLink>
+              <li className="nav-item dropdown" >
+                <a href="#" className="nav-link dropdown-toggle" id="micsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mics</a>
+                <div className="dropdown-menu" aria-labelledby="micsDropdown">
+                  <NavLink to="/List" activeClassName='active' className="nav-link">Mics List</NavLink>
+                  <NavLink to="/AddMic" activeClassName='active' className="nav-link">Add Mic</NavLink>
+                </div>
+              </li>
+              <li className="nav-item dropdown">
+                <a href="#" className="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Users</a>
+                <div className="dropdown-menu" aria-labelledby="micsDropdown">
+                  <NavLink to="/Users" activeClassName='active' className="nav-link">Users List</NavLink>
+                  <NavLink to="/Users" activeClassName='active' className="nav-link">Push Notifications</NavLink>
+                </div>
+              </li>
+              <li className="nav-item dropdown">
+                <a href="#" className="nav-link dropdown-toggle" id="ambassadorsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ambassadors</a>
+                <div className="dropdown-menu" aria-labelledby="ambassadorsDropdown">
+                  <NavLink to="/Ambassadors" activeClassName='active' className="nav-link">Ambassadors List</NavLink>
+                  <NavLink to="/AddAmbassadors" activeClassName='active' className="nav-link">Add Ambassador</NavLink>
+                </div>
               </li>
               <li className="nav-item">
-                <NavLink to="/AddMic" activeClassName='active' className="nav-link">Add Mic</NavLink>
-              </li>
-              <li className="nav-item">
-              <NavLink to="/Users"  activeClassName='active' className="nav-link">Users</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink to="/Ambassadors" activeClassName='active' className="nav-link">Ambassadors</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink to="/AddAmbassadors" activeClassName='active' className="nav-link">Add Ambassador</NavLink>
-              </li>
-              <li className="nav-item">
-              <Link to="/" className="nav-link"   onClick={this.logout}>Logout</Link>
+                <Link to="/" className="nav-link" onClick={this.logout}>Logout</Link>
               </li>
             </ul>
 
