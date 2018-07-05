@@ -5,6 +5,7 @@ import Header from './components/header';
 import ListContainer from './components/MicList/listContainer';
 import Pagination from './components/pagination';
 import {DebounceInput} from 'react-debounce-input';
+import {CONFIGURATION} from './utils/configuration';
 
 let that = null;
 const entriesPerPage = 100;
@@ -40,7 +41,7 @@ export default class App extends Component {
 
     var auth = {
       method: 'GET',
-      url: 'http://staging-api.micmaps.com/api/mics',
+      url: CONFIGURATION.API_ROOT + '/mics',
       headers: {
         'Authorization': window.sessionStorage.getItem('token')
       },
@@ -65,7 +66,7 @@ export default class App extends Component {
   getCities(micFilter) {
     var auth = {
       method: 'GET',
-      url: 'http://staging-api.micmaps.com/api/mics/cities',
+      url: CONFIGURATION.API_ROOT + '/mics/cities',
       headers: {
         'Authorization': window.sessionStorage.getItem('token')
       },

@@ -3,6 +3,7 @@ import Axios from 'axios';
 import Header from './header';
 import Moment from 'react-moment';
 import {Link} from 'react-router-dom';
+import {CONFIGURATION} from '../utils/configuration';
 
 const entriesPerPage = 100;
 
@@ -35,7 +36,7 @@ export default class AmbassadorUsers extends Component {
       getEntries() {
         var auth = {
           method: 'GET',
-          url: `http://staging-api.micmaps.com/api/ambassadors/${this.props.match.params.id}/users`,
+          url: `${CONFIGURATION.API_ROOT}/ambassadors/${this.props.match.params.id}/users`,
           headers: {
             'Authorization' : window.sessionStorage.getItem('token')
           },

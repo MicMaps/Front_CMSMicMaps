@@ -3,6 +3,7 @@ import Axios from 'axios';
 import Header from './header';
 import Moment from 'react-moment';
 import {Link} from 'react-router-dom';
+import { CONFIGURATION } from '../utils/configuration';
 
 const entriesPerPage = 100;
 
@@ -40,7 +41,7 @@ export default class Users extends Component {
       getTotalUsers() {
         var auth = {
             method: 'GET',
-            url: 'http://staging-api.micmaps.com/api/users/total',
+            url: CONFIGURATION.API_ROOT + '/users/total',
             headers: {
               'Authorization' : window.sessionStorage.getItem('token')
             }
@@ -66,7 +67,7 @@ export default class Users extends Component {
       getEntries() {
         var auth = {
           method: 'GET',
-          url: 'http://staging-api.micmaps.com/api/users',
+          url: CONFIGURATION.API_ROOT + '/users',
           headers: {
             'Authorization' : window.sessionStorage.getItem('token')
           },

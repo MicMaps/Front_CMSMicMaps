@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
+import {CONFIGURATION} from '../../utils/configuration';
 
 export default class UserInfo extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ export default class UserInfo extends Component {
     if(this.props.status === 'approved') {
       let auth = {
         method: 'PUT',
-        url: `http://staging-api.micmaps.com/api/mic/${this.props.id}`,
+        url: `${CONFIGURATION.API_ROOT}/mic/${this.props.id}`,
         headers: {
           'Authorization' : window.sessionStorage.getItem('token')
         },
@@ -32,7 +33,7 @@ export default class UserInfo extends Component {
     } else {
       let auth = {
         method: 'PUT',
-        url: `http://staging-api.micmaps.com/api/mic/${this.props.id}`,
+        url: `${CONFIGURATION.API_ROOT}/mic/${this.props.id}`,
         headers: {
           'Authorization' : window.sessionStorage.getItem('token')
         },

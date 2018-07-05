@@ -11,6 +11,7 @@ const MultipleDatesCalendar = withMultipleDates(Calendar);
 import DatePicker from 'react-date-picker';
 import TimeSelector from './timeSelector';
 import Header from './header';
+import {CONFIGURATION} from '../utils/configuration';
 
 let radioButton1 = "btn btn-primary active";
 let radioButton2 = "btn btn-primary";
@@ -362,7 +363,7 @@ class EditMic extends Component {
 
     var auth = {
       method: 'PUT',
-      url: `http://staging-api.micmaps.com/api/mic/${this.state._id}`,
+      url: `${CONFIGURATION.API_ROOT}/mic/${this.state._id}`,
       headers: {
         'Authorization': window.sessionStorage.getItem('token')
       },
@@ -428,7 +429,7 @@ class EditMic extends Component {
   loadMic(id) {
     let auth = {
       method: 'GET',
-      url: `http://staging-api.micmaps.com/api/mic/${id}`,
+      url: `${CONFIGURATION.API_ROOT}/mic/${id}`,
       headers: {
         'Authorization': window.sessionStorage.getItem('token')
       }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import Header from './header';
-
+import {CONFIGURATION} from '../utils/configuration';
 
 
 export default class AddAmbassador extends Component {
@@ -33,7 +33,7 @@ export default class AddAmbassador extends Component {
         }
         let auth = {
             method: 'POST',
-            url: 'http://staging-api.micmaps.com/api/ambassadors',
+            url: CONFIGURATION.API_ROOT + '/ambassadors',
             headers: {
                 'Authorization' : window.sessionStorage.getItem('token')
             },

@@ -6,6 +6,7 @@ import UserInfo from './userEntry/userInfo';
 import UserDetails from './userEntry/userDetails';
 import Header from './header';
 import {Link} from 'react-router-dom';
+import {CONFIGURATION} from '../utils/configuration';
 
 const spinner = (
   <div className="spinner">
@@ -30,7 +31,7 @@ export default class MicEntry extends Component {
     if(this.state.entry.status === 'approved') {
       let auth = {
         method: 'PUT',
-        url: `http://staging-api.micmaps.com/api/mic/${this.props.match.params.MicId}`,
+        url: `${CONFIGURATION.API_ROOT}/mic/${this.props.match.params.MicId}`,
         headers: {
           'Authorization' : window.sessionStorage.getItem('token')
         },
@@ -49,7 +50,7 @@ export default class MicEntry extends Component {
     } else {
       let auth = {
         method: 'PUT',
-        url: `http://staging-api.micmaps.com/api/mic/${this.props.match.params.MicId}`,
+        url: `${CONFIGURATION.API_ROOT}/mic/${this.props.match.params.MicId}`,
         headers: {
           'Authorization' : window.sessionStorage.getItem('token')
         },
@@ -83,7 +84,7 @@ export default class MicEntry extends Component {
   getMic() {
     let auth = {
       method: 'GET',
-      url: `http://staging-api.micmaps.com/api/mic/${this.props.match.params.MicId}`,
+      url: `${CONFIGURATION.API_ROOT}/mic/${this.props.match.params.MicId}`,
       headers: {
         'Authorization': window.sessionStorage.getItem('token')
       }

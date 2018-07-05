@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import {CONFIGURATION} from '../utils/configuration';
 
 export default class Login extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ export default class Login extends Component {
   login() {
     let auth = {
       method: 'POST',
-      url: 'http://staging-api.micmaps.com/api/authenticate',
+      url: CONFIGURATION.API_ROOT + '/authenticate',
       data: {
         email: this.state.email,
         password: this.state.password

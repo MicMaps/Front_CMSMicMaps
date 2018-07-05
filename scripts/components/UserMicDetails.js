@@ -3,6 +3,7 @@ import Axios from 'axios';
 
 import Header from './header';
 import ListContainer from './MicList/listContainer';
+import {CONFIGURATION} from '../utils/configuration';
 
 let that = null;
 const entriesPerPage = 100;
@@ -38,7 +39,7 @@ export default class UserMicDetails extends Component {
   getEntries(status) {
     var auth = {
       method: 'GET',
-      url: 'http://staging-api.micmaps.com/api/mics',
+      url: CONFIGURATION.API_ROOT + '/mics',
       headers: {
         'Authorization' : window.sessionStorage.getItem('token')
       },
@@ -75,7 +76,7 @@ export default class UserMicDetails extends Component {
   getUser() {
     var auth = {
         method: 'GET',
-        url: `http://staging-api.micmaps.com/api/user/${this.props.match.params.id}`,
+        url: `${CONFIGURATION.API_ROOT}/user/${this.props.match.params.id}`,
         headers: {
           'Authorization' : window.sessionStorage.getItem('token')
         }

@@ -3,6 +3,7 @@ import Moment from 'react-moment';
 import moment from 'moment';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
+import {CONFIGURATION} from '../../utils/configuration';
 
 export default class ListEntry extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ export default class ListEntry extends Component {
   deleteEntry(entry) {
     let auth = {
       method: 'DELETE',
-      url: `http://staging-api.micmaps.com/api/mic/${entry._id}`,
+      url: `${CONFIGURATION.API_ROOT}/mic/${entry._id}`,
       headers: {
         authorization: window.sessionStorage.getItem('token')
       }
