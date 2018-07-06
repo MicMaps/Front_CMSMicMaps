@@ -14,6 +14,7 @@ import Users from './components/Users';
 import UserMicDetails from './components/UserMicDetails';
 import AmbassadorMicDetails from './components/AmbassadorMicDetails';
 import AmbassadorUsers from './components/AmbassadorUsers';
+import UserPush from './components/UserPush';
 
 render(
   <BrowserRouter>
@@ -33,6 +34,7 @@ render(
       <Route path='/AddAmbassadors' component={AddAmbassador} />
       <Route exact path='/Users' component={Users} />
       <Route path='/Users/:id' component={UserMicDetails} />
+      <Route path='/push-notifications' component={UserPush} />
     </Switch>
     </div>
   </BrowserRouter>

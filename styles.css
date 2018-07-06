@@ -1,4 +1,7 @@
 
+*, body {
+  font-family: 'Dosis', sans-serif;
+}
 
 
 .navbar.mm-navbar {
@@ -443,4 +446,17 @@ ul.bottomDiv {
 }
 .search-container {
   margin-bottom: 20px;
+}
+
+.user-push-container {
+  margin-top: 20px;
+}
+.location-search-input {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    border: honeydew;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 2px;
+    outline: none;
 }

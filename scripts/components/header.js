@@ -33,7 +33,7 @@ export default class Header extends Component {
                 <a href="#" className="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Users</a>
                 <div className="dropdown-menu" aria-labelledby="micsDropdown">
                   <NavLink to="/Users" activeClassName='active' className="nav-link">Users List</NavLink>
-                  <NavLink to="/Users" activeClassName='active' className="nav-link">Push Notifications</NavLink>
+                  <NavLink to="/push-notifications" activeClassName='active' className="nav-link">Push Notifications</NavLink>
                 </div>
               </li>
               <li className="nav-item dropdown">
