@@ -112,7 +112,7 @@ export default class UserPush extends Component {
             console.log(res)
             if(res.status == 200) {
                 this.setState({statusMessage:'Message sent!'})
-                this.resetState();
+                //this.resetState();
             }
           }).catch((err) => {
             console.log(err.response)
