@@ -172,9 +172,12 @@ export default class MicEntry extends Component {
               <div className="field-container">
                 <div className="label">Event Day(s)</div>
                 <div className="value">
-                  {entry.days.map((day) => {
+                  {entry.repeatTimes && entry.repeatTimes <=52 ? entry.days.map((day) => {
                     return ` ${moment(day).format('MM/DD/YY')},`
-                  })
+                  }) : null
+                  }
+                  {
+                      entry.repeatTimes > 52 ? `Indefinitely - ${entry.repeatFrequency} from ${moment(entry.days[0]).format('MM/DD/YY')}` : null
                   }
                 </div>
               </div>
@@ -187,7 +190,8 @@ export default class MicEntry extends Component {
               <div className="field-container">
                 <div className="label">Repeat Times</div>
                 <div className="value">
-                  {entry.repeatTimes ? entry.repeatTimes : 'N/A'}
+                  {entry.repeatTimes <= 52 ? entry.repeatTimes : null}
+                  {entry.repeatTimes > 52 ? 'Indefinitely' : null}
                 </div>
               </div>
               <div className="row">

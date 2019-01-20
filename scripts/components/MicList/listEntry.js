@@ -55,10 +55,12 @@ export default class ListEntry extends Component {
           }
           {this.props.entry.repeatFrequency?
            this.props.entry.repeatFrequency !== 'custom'?
-            <div><span className="subtitle">Repeat Times - </span>{this.props.entry.repeatFrequency}
-              <br/><span className="subtitle"> Repeats Until - </span><Moment format="MMM D, YYYY">{this.props.entry.days[this.props.entry.days.length - 1]}</Moment>
+            <div><span className="subtitle">Repeat Frequency - </span>{this.props.entry.repeatFrequency}
+              <br/><span className="subtitle"> Repeats Until - </span>
+                { this.props.entry.repeatTimes <= 52 && <Moment format="MMM D, YYYY">{this.props.entry.days[this.props.entry.days.length - 1]}</Moment> }
+                { this.props.entry.repeatTimes > 52 && `Indefinitely - ${this.props.entry.repeatFrequency} from ` && <Moment format="MMM D, YYYY">{this.props.entry.days[0]}</Moment> }
             </div>
-            :<div><span className="subtitle">Repeat Times - </span> {this.props.entry.repeatFrequency}
+            :<div><span className="subtitle">Repeat Frequency - </span> {this.props.entry.repeatFrequency}
             <br/><span className="subtitle"> Last Date - </span><Moment format="MMM D, YYYY">{this.props.entry.days[this.props.entry.days.length - 1]}</Moment>
             </div>
             :null

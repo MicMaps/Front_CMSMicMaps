@@ -38,7 +38,6 @@ export default class App extends Component {
   }
 
   getMics(status) {
-
     var auth = {
       method: 'GET',
       url: CONFIGURATION.API_ROOT + '/mics',

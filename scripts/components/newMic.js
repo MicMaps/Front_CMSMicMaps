@@ -306,16 +306,26 @@ class NewMic extends Component {
         }
         break;
       case 'weekly':
-        for (let i = 1; i < repeatTimes; i++) {
-          let dayToPush = moment(formattedFirstday).add(i, 'w');
-          days.push(moment(dayToPush).startOf('day').toDate());
+        if (repeatTimes <= 52) {
+            for (let i = 1; i < repeatTimes; i++) {
+                let dayToPush = moment(formattedFirstday).add(i, 'w');
+                days.push(moment(dayToPush).startOf('day').toDate());
+              }
+              micParams.repeatForever = false;
+        } else {
+            micParams.repeatForever = true;
         }
         micParams.days = days;
         break;
       case 'monthly':
-        for (let i = 1; i < repeatTimes; i++) {
-          let dayToPush = moment(formattedFirstday).add(i, 'M');
-          days.push(moment(dayToPush).startOf('day').toDate());
+        if (repeatTimes <= 52) {
+            for (let i = 1; i < repeatTimes; i++) {
+                let dayToPush = moment(formattedFirstday).add(i, 'M');
+                days.push(moment(dayToPush).startOf('day').toDate());
+            }
+            micParams.repeatForever = false;
+        } else {
+            micParams.repeatForever = true;
         }
         micParams.days = days;
         break;
@@ -368,6 +378,7 @@ class NewMic extends Component {
     for (let i = 1; i <= maxCount; i++) {
       optionList.push(<option value={i} key={i}>{i}</option>)
     }
+    optionList.push(<option value={100000} key={maxCount+1}>{'Indefinite (Never ends).'}</option>)
     return optionList;
   }
 
