@@ -42,23 +42,23 @@ export default class ListEntry extends Component {
   }
 
   render() {
-    // console.log(this.props.entry.micType);
+    console.log(this.props.entry);
     return (
       <tr>
         <td>
           Start - <Moment format="MMM D, YYYY">{this.props.entry.days[0]}</Moment>
           <br/>
           {
-            this.nextDay(this.props.entry.days)?
+            this.props.entry.repeatForever != true && this.nextDay(this.props.entry.days)?
             <div>Next - <b><Moment format="MMM D, YYYY">{this.nextDay(this.props.entry.days)}</Moment></b></div>
-            :null
+            :<div>Next - <b><Moment format="MMM D, YYYY">{this.props.entry.nextPerformanceDay}</Moment></b></div>
           }
           {this.props.entry.repeatFrequency?
            this.props.entry.repeatFrequency !== 'custom'?
             <div><span className="subtitle">Repeat Frequency - </span>{this.props.entry.repeatFrequency}
-              <br/><span className="subtitle"> Repeats Until - </span>
-                { this.props.entry.repeatTimes <= 52 && <Moment format="MMM D, YYYY">{this.props.entry.days[this.props.entry.days.length - 1]}</Moment> }
-                { this.props.entry.repeatTimes > 52 && `Indefinitely - ${this.props.entry.repeatFrequency} from ` && <Moment format="MMM D, YYYY">{this.props.entry.days[0]}</Moment> }
+              <br/><span className="subtitle"> Repeats Until - </span> 
+                { this.props.entry.repeatForever != true ? <Moment format="MMM D, YYYY">{this.props.entry.days[this.props.entry.days.length - 1]}</Moment> : null}
+                { this.props.entry.repeatForever == true ? (<span>{`Indefinitely - ${this.props.entry.repeatFrequency} from `} <Moment format="MMM D, YYYY">{this.props.entry.days[0]}</Moment></span>) : null }
             </div>
             :<div><span className="subtitle">Repeat Frequency - </span> {this.props.entry.repeatFrequency}
             <br/><span className="subtitle"> Last Date - </span><Moment format="MMM D, YYYY">{this.props.entry.days[this.props.entry.days.length - 1]}</Moment>
